@@ -157,7 +157,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-  return parseInt(value);
+  return +value;
 }
 
 /**
@@ -174,7 +174,8 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelepipedDiagonal(a, b, c) {
-  return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2));
+  return Math.sqrt(a * a + b * b + c * c);
+  // return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2));
 }
 
 
@@ -197,10 +198,10 @@ function getParallelepipedDiagonal(a, b, c) {
  */
 function roundToPowerOfTen(num, pow) {
   let dez = '1';
-  for (let i = 0; i < pow; i++) {
+  for (let i = 0; i < pow; i += 1) {
     dez += 0;
   }
-  return Math.ceil(num / parseInt(dez)) * parseInt(dez);
+  return Math.ceil(num / +dez) * +dez;
 }
 
 /**
@@ -221,7 +222,7 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  return n % 2 === 0;
+  return !((n % 2 === 0 || n % 3 === 0));
 }
 
 /**
@@ -240,8 +241,8 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  if (parseInt(value)) {
-    return parseInt(value);
+  if (parseInt(value, 10)) {
+    return parseInt(value, 10);
   }
   return def;
 }

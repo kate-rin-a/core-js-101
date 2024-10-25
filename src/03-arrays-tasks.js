@@ -60,17 +60,17 @@ function generateOdds(len) {
  */
 
 function doubleArray(arr) {
-  const doubleArray = new Array(2).fill(0).map(() => arr);
+  const doubleArr = new Array(2).fill(0).map(() => arr);
   const sum = [];
 
-  /* for (let i = 0; i < doubleArray.length; i++) {
-      for (let j = 0; j < doubleArray[i].length; j++) {
+  /* for (let i = 0; i < doubleArr.length; i++) {
+      for (let j = 0; j < doubleArr[i].length; j++) {
         sum.push(doubleArray[i][j]);
       }
     }
     return sum; */
 
-  doubleArray.forEach((element) => {
+  doubleArr.forEach((element) => {
     sum.push(...element);
   });
   return sum;
@@ -225,7 +225,7 @@ function toCsvText(arr) {
   let finalStr = '';
 
   arr.forEach((element) => {
-    	const singleArr = element.join('');
+    const singleArr = element.join('');
     sum.push(singleArr);
   });
 
@@ -272,7 +272,7 @@ function toArrayOfSquares(arr) {
  */
 function getMovingSum(arr) {
   let currentItem = arr[0];
-  return arr.map((item, index, arr) => {
+  return arr.map((item, index) => {
     if (index !== 0) {
       currentItem += item;
       return currentItem;
@@ -314,11 +314,11 @@ function getSecondItems(arr) {
 
 function propagateItemsByPositionIndex(arr) {
   const resultArr = [];
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += 1) {
     if (i === 0) {
       resultArr.push(arr[i]);
     } else {
-      for (let j = 0; j <= i; j++) {
+      for (let j = 0; j <= i; j += 1) {
         resultArr.push(arr[i]);
       }
     }
@@ -359,6 +359,9 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
+  if (arr.length < 1) {
+    return 0;
+  }
   return arr.filter((item) => typeof item === 'number' && item > 0);
 }
 
@@ -375,26 +378,25 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(arr) {
-  function sortDigitNamesByNumericOrder(arr) {
-    const numbertoString = {
-      zero: 0,
-      one: 1,
-      two: 2,
-      three: 3,
-      four: 4,
-      five: 5,
-      six: 6,
-      seven: 7,
-      eight: 8,
-      nine: 9,
-    };
 
-    return arr
-      .map((item) => [numbertoString[item], item])
-      .sort((a, b) => a[0] - b[0])
-      .map((item) => item[1]);
-  }
+function sortDigitNamesByNumericOrder(arr) {
+  const numbertoString = {
+    zero: 0,
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+  };
+
+  return arr
+    .map((item) => [numbertoString[item], item])
+    .sort((a, b) => a[0] - b[0])
+    .map((item) => item[1]);
 }
 
 /**
@@ -519,11 +521,12 @@ function sortCitiesArray(arr) {
  */
 function getIdentityMatrix(n) {
   const matrix = new Array(n);
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < n; i += 1) {
     matrix[i] = new Array(n).fill(0).map((item, index) => {
+      let currentItem = item;
       if (index === i) {
-        item = 1;
-      } return item;
+        currentItem = 1;
+      } return currentItem;
     });
   }
   return matrix;
@@ -544,7 +547,7 @@ function getIdentityMatrix(n) {
  */
 function getIntervalArray(start, end) {
   const sum = [];
-  for (let i = start; i <= end; i++) {
+  for (let i = start; i <= end; i += 1) {
     sum.push(i);
   }
   return sum;
@@ -562,7 +565,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-  return arr.sort((a, b) => a - b).filter((item, index, arr) => item !== arr[index + 1]);
+  return arr.sort((a, b) => a - b).filter((item, index, array) => item !== array[index + 1]);
 }
 
 /**
@@ -613,9 +616,9 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(arr, childrenSelector) {
+/* function selectMany(arr, childrenSelector) {
   throw new Error('Not implemented');
-}
+} */
 
 
 /**
@@ -695,7 +698,7 @@ module.exports = {
   getIntervalArray,
   distinct,
   group,
-  selectMany,
+  /* selectMany, */
   getElementByIndexes,
   swapHeadAndTail,
 };

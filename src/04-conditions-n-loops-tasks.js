@@ -54,12 +54,12 @@ function getFactorial(n) {
   if (n < 0) {
     return -1;
   }
-  if (n == 0 || n == 1) {
+  if (n === 0 || n === 1) {
     return 1;
   }
 
   let result = 1;
-  for (let i = 2; i <= n; i++) {
+  for (let i = 2; i <= n; i += 1) {
     result *= i;
   }
   return result;
@@ -81,7 +81,7 @@ function getFactorial(n) {
 function getSumBetweenNumbers(n1, n2) {
   let result = n1;
   const length = n2 - n1;
-  for (let i = 1; i <= length; i++) {
+  for (let i = 1; i <= length; i += 1) {
     const nextChar = n1 + i;
     result += nextChar;
   }
