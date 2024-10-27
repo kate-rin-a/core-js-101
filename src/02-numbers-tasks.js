@@ -197,11 +197,13 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  let dez = '1';
+  /* let dez = '1';
   for (let i = 0; i < pow; i += 1) {
     dez += 0;
   }
-  return Math.ceil(num / +dez) * +dez;
+  return Math.ceil(num / +dez) * +dez; */
+  const decimals = 10 ** -6 * Math.floor(pow / 10);
+  return Math.round(num * decimals) * pow;
 }
 
 /**
@@ -222,7 +224,7 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  return !((n % 2 === 0 || n % 3 === 0));
+  return !(n % 2 === 0) && (n % 3 !== 0);
 }
 
 /**

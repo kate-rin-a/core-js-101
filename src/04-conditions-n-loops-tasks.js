@@ -28,12 +28,12 @@
  *
  */
 function getFizzBuzz(num) {
-  if (num % 3 === 0 && num % 5 === 0) {
+  if (num % 15 === 0) {
     return 'FizzBuzz';
   } if (num % 3 === 0) {
     return 'Fizz';
   } if (num % 5 === 0) {
-    return 'Bizz';
+    return 'Buzz';
   }
   return num;
 }
@@ -232,8 +232,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -249,10 +249,10 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  const reversedNum = num.toString().split('').reverse().join('');
+  return parseInt(reversedNum, 10);
 }
-
 
 /**
  * Validates the CCN (credit card number) and return true if CCN is valid
@@ -292,8 +292,20 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let sum = 0;
+  const numStr = num.toString();
+  for (let i = 0; i < numStr.length; i += 1) {
+    sum += parseFloat(numStr[i], 10);
+  }
+
+  const newSum = sum.toString();
+  let newResult = 0;
+  for (let j = 0; j < newSum.length; j += 1) {
+    newResult += parseFloat(newSum[j], 10);
+  }
+
+  return newResult;
 }
 
 
